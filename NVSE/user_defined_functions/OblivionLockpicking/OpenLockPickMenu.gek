@@ -1,0 +1,94 @@
+int	iMenuID
+
+int iLockLevel
+int iPickCount
+ref rLock
+
+begin Function {iMenuID}
+
+	; Show vanilla menu
+	if eval (GetType (rLock = GetMenuTargetRef 1014) == 28 && Goo1.AuxVarGetFlt "*OblLock_INI" 0 == 0) || (GetType rLock == 27 && Goo1.AuxVarGetFlt "*OblLock_INI" 1 == 0)
+		SetNumericGameSetting "fLockSkillBase" (Goo1.AuxVarGetFlt "*GS_fLockSkillBase")
+		return
+	endif
+
+	; Hide vanilla menu
+	if eval GetUIFloatAlt "LockPickMenu\visible" == 0
+		return
+	endif
+	SetUIFloatAlt "LockPickMenu\visible" 0
+
+	; Init Oblivion Lockpicking
+	if eval GetUIFloatAlt "LockPickMenu\_OblivionLockpicking"
+		return
+	endif
+	SetUIFloatAlt "LockPickMenu\_OblivionLockpicking" 1
+	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\visible" 1
+
+	; Update Force
+	SetNumericGameSetting "fLockSkillBase" 100
+
+	; Reset Aux Vars
+	Goo1.AuxVarSetFlt "*OblLock_Flt" 0 0
+	if eval Goo1.AuxVarGetFlt "*OblLock_INI" 2
+		Goo1.AuxVarSetFlt "*OblLock_Flt" (GetCursorPos X) 1
+		Goo1.AuxVarSetFlt "*OblLock_Flt" (GetCursorPos Y) 2
+	endif
+
+	; Mouse/Stick input handling
+	SetGameMainLoopCallback (CompileScript "OblivionLockpicking\InputLoop.gek") 1 10 10
+
+	; Disable controls
+	DK 17					; W
+	DK 18					; E
+	DK 31					; A
+	DK 32					; S
+	DK 33					; F
+	DK 30					; D
+	SetStickDisabled 1 1	; Right Stick
+
+	rLock = GetMenuTargetRef 1014
+	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_lock_level" (iLockLevel = rLock.GetLockLevel)
+
+	; Systemcolor fix
+	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\PCShortcutLabel\systemcolor" 1
+	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\xbox_button\systemcolor" 1
+
+	; Disable LockPickMenu buttons
+	SetUIFloatAlt "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\target" 0
+	SetUIFloatAlt "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\visible" 0
+	SetUIFloatAlt "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\target" 0
+	SetUIFloatAlt "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\visible" 0
+
+	; Update info rect
+	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_InfoRect\LPM_SkillDisplay\_Value" (GetUIString "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_InfoRect\LPM_SkillDisplay\_Value")
+	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_InfoRect\LPM_PickCountDisplay\_Value" (iPickCount = Player.GetItemCount Lockpick)
+	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_InfoRect\LPM_LevelDisplay\_Value" (GetUIString "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_InfoRect\LPM_LevelDisplay\_Value")
+
+	; Update button key string
+	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\_PCButtonText" (GetUIString "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\_PCButtonText")
+	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\_PCButtonText" (GetUIString "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\_PCButtonText")
+	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\string" "%z [%g%%]" (GetStringSetting "sForceLock") (GetMaxOf 0 (GetMinOf 100 ((GetMaxOf 0 (GetMinOf 100 (Player.GetAV Lockpick))) + (Goo1.AuxVarGetFlt "*GS_fLockSkillBase") - iLockLevel)))
+
+	; Reset pick position
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" -2.5
+	if eval iPickCount > 0
+		SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" -2.5 0 0.5
+		CallAfter 0.55 (CompileScript "OblivionLockpicking\InputQueue.gek") 1
+	endif
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_y" 1
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_unlock" 0
+
+	; Init tumbler positions
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_0" 0
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_1" (eval iLockLevel < 25)
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_2" (eval iLockLevel < 50)
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_3" (eval iLockLevel < 75)
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_4" (eval iLockLevel < 100)
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_lock_pin_0" 0
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_lock_pin_1" (eval iLockLevel < 25)
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_lock_pin_2" (eval iLockLevel < 50)
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_lock_pin_3" (eval iLockLevel < 75)
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_lock_pin_4" (eval iLockLevel < 100)
+
+end

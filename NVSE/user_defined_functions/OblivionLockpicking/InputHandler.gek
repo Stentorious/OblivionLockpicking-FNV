@@ -1,0 +1,221 @@
+int	iKeyID
+
+int iIndex
+int iPinReset
+int iLockpickSkill
+int iLockpickCount
+int iPickReadyX
+int iPickReadyY
+int iTumbler
+float fSkillMul
+float fPickX
+float fPickY
+float fRiseTime
+float fAnimStage
+ref rLock
+
+begin Function {iKeyID}
+
+	; Block input
+	if eval GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\visible" == 0 || GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_unlock" > 0 || GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pin_break" > 0 || MenuMode 3 || (GetActiveMenuMode != 1004 && GetActiveMenuMode != 1014)
+		return
+	endif
+
+	; Close Menu
+	if eval iKeyID == 18 || iKeyID == 8192
+		Call (CompileScript "OblivionLockpicking\CloseLockPickMenu.gek")
+		return
+	endif
+
+	if eval GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pick_x" < 0
+		return
+	endif
+
+	iLockpickSkill = GetMaxOf 0 (GetMinOf 100 (Player.GetAV Lockpick))
+	iLockpickCount = Player.GetItemCount Lockpick
+
+	; Force lock
+	if eval iKeyID == 33 || iKeyID == 16384
+
+		; Successful force
+		if eval (GetMaxOf 0 (GetMinOf 100 (iLockpickSkill + (Goo1.AuxVarGetFlt "*GS_fLockSkillBase") - (GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_lock_level")))) > (GetRandomInRange 0 100)
+
+			; Update tumbler position
+			iIndex = 5
+			while (iIndex -= 1) > -1
+				SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iIndex) 1
+				if eval GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iIndex) == 0
+					SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iIndex) 0 1 0.3
+				endif
+			loop
+
+			; Play unlock anim
+			SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_unlock" 0 1 1.25
+
+			; Sound event
+			PlaySound WPNRifleHuntingReloadPt3 1
+			PlaySound WPNRifleHuntingReloadPt3 1
+
+			; Init unlock
+			ClickMenuButton "LockPickMenu#9"
+
+			CallAfter 1.5 (CompileScript "OblivionLockpicking\CloseLockPickMenu.gek") 2
+
+		; Failed force
+		else
+
+			; Sound event
+			PlaySound UILockpickingForceFail 1
+
+			; Break lock
+			if eval Rand 0 1 < (Goo1.AuxVarGetFlt "*OblLock_INI" 3)
+				SetLockedOut ((GetLockedOut (rLock = GetMenuTargetRef 1014)) + 1) rLock
+				MessageExAlt 3 "#5|%z" (GetStringSetting "sLockBroken")
+				Call (CompileScript "OblivionLockpicking\CloseLockPickMenu.gek")
+
+			; Break bobby pin
+			else
+
+				; Update lockpick count
+				Player.RemoveItem Lockpick 1 1
+				SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_InfoRect\LPM_PickCountDisplay\_Value" (iLockpickCount -= 1)
+				if eval iLockpickCount == 0
+					MessageExAlt 3 "#5|%z" (GetStringSetting "sOutOfLockpicks")
+				endif
+
+				; Lockpick anim
+				SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_break" 0 1 0.6
+				CallAfter 0.6 (begin function {}
+					SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_break" 0
+					SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" -2.5
+					if eval Player.GetItemCount Lockpick > 0
+						SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" -2.5 0 0.5
+						PlaySound UILockpickingEnter 1
+						CallAfter 0.55 (CompileScript "OblivionLockpicking\InputQueue.gek") 1
+					endif
+				end) 1
+
+				PlaySound UILockpickingPickBreak 1
+
+			endif
+		endif
+	endif
+
+	iTumbler = GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_index_tumbler"
+	fPickX = GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pick_x"
+	iPickReadyX = eval (FMod fPickX 1 == 0)
+	iPickReadyY = eval (fPickY = GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pick_y") == 1
+
+	; Left
+	if eval (iKeyID == 4 || iKeyID == 30) && iPickReadyY && fPickX >= 1 && iPickReadyX
+		SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" (fPickX - 0.001)
+		SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" (fPickX - 0.001) (fPickX - 1) 0.3
+		PlaySound UILockpickingPickTensionLPM 1
+		CallAfter 0.36 (CompileScript "OblivionLockpicking\InputQueue.gek") 1
+
+	; Right
+	elseif eval (iKeyID == 8 || iKeyID == 32) && iPickReadyY && fPickX <= 3 && iPickReadyX
+		SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" (fPickX + 0.001)
+		SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" (fPickX + 0.001) (fPickX + 1) 0.3
+		PlaySound UILockpickingPickTensionLPM 1
+		CallAfter 0.36 (CompileScript "OblivionLockpicking\InputQueue.gek") 1
+
+	; Up
+	elseif eval (iKeyID == 1 || iKeyID == 17) && fPickY == 1 && iPickReadyX
+
+		; Pick movement
+		SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_y" 0.001
+		SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_y" 0.001 1 0.45
+		CallAfter 0.5 (CompileScript "OblivionLockpicking\InputQueue.gek") 1
+
+		PlaySound UILockpickingPickTensionLPM 1
+
+		if eval GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $fPickX) == 0
+
+			SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_index_tumbler" fPickX
+
+			; Generate tumbler rise time
+			fAnimStage = GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $fPickX)
+			if eval fAnimStage == 0
+				fSkillMul = iLockpickSkill / 100
+				fRiseTime = Rand ((Goo1.AuxVarGetFlt "*OblLock_INI" 5) + ((Goo1.AuxVarGetFlt "*OblLock_INI" 6) * fSkillMul)) ((Goo1.AuxVarGetFlt "*OblLock_INI" 7) + ((Goo1.AuxVarGetFlt "*OblLock_INI" 8) * fSkillMul))
+				Goo1.AuxVarSetFlt "*OblLock_Flt" fRiseTime 0
+			else
+				fRiseTime = Goo1.AuxVarGetFlt "*OblLock_Flt" 0
+			endif
+
+			; Tumbler down
+			CallAfter (fRiseTime + (fRiseTime * (Goo1.AuxVarGetFlt "*OblLock_INI" 9)) + 0.08) (begin function {int iTumIn}
+				if eval GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iTumIn) == 0 && GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iTumIn) == 1
+					SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iTumIn) 0.999
+					SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iTumIn) 0.999 0 0.4
+					PlaySound WPNBBGunReloadPt1 1
+				endif
+			end) 1 fPickX
+
+			; Tumbler up
+			CallAfter 0.08 (CompileScript "OblivionLockpicking\TumblerUp.gek") 1 fPickX (fRiseTime * (1 - fAnimStage))
+
+		endif
+
+	; Set tumbler
+	elseif eval (iKeyID == 4096 || iKeyID == 57)
+
+		PlaySound WPNRifleHuntingReloadPt3 1
+
+		if eval GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iTumbler) > 0 && GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iTumbler) == 0
+
+			; Successful set
+			if eval GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iTumbler) == 1
+				SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iTumbler) 0.001
+				SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iTumbler) 0.001 1 0.3
+
+				if eval GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_set_tumblers" > 4
+					ClickMenuButton "LockPickMenu#9"
+					SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_unlock" 0 1 1.25
+					CallAfter 1.5 (CompileScript "OblivionLockpicking\CloseLockPickMenu.gek") 2
+				endif
+
+			; Break lockpick
+			else
+
+				; Update lockpick count
+				Player.RemoveItem Lockpick 1 1
+				SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_InfoRect\LPM_PickCountDisplay\_Value" (iLockpickCount -= 1)
+				if eval iLockpickCount == 0
+					MessageExAlt 3 "#5|%z" (GetStringSetting "sOutOfLockpicks")
+				endif
+
+				; Reset certain tumblers
+				iPinReset = 4
+				if eval Goo1.AuxVarGetFlt "*OblLock_INI" 4
+					iPinReset -= (Floor (iLockpickSkill / 25))
+				endif
+				iIndex = (GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_lock_level" / 25) + 1
+				while (iIndex -= 1) > -1 && iPinReset > 0
+					if eval GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iIndex) == 1
+						SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_lock_pin_" + $iIndex) 1 0 0.1
+						SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iIndex) (Rand 1 1.2) 0 (Rand 0.35 0.55)
+						PlaySound WPNBBGunReloadPt1 1
+						iPinReset -= 1
+					endif
+				loop
+
+				; Lockpick anim
+				SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_break" 0 1 0.6
+				CallAfter 0.6 (begin function {}
+					SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pin_break" 0
+					SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" -2.5
+					if eval Player.GetItemCount Lockpick > 0
+						SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" -2.5 0 0.5
+						PlaySound UILockpickingEnter 1
+						CallAfter 0.55 (CompileScript "OblivionLockpicking\InputQueue.gek") 1
+					endif
+				end) 1
+
+				PlaySound UILockpickingPickBreak 1
+
+			endif
+		endif
+	endif
+end

@@ -1,0 +1,27 @@
+float fMouseX
+float fMouseY
+
+begin Function {}
+
+	if eval Goo1.AuxVarGetFlt "*OblLock_INI" 2
+		fMouseX = GetCursorPos X
+		fMouseY = GetCursorPos Y
+	endif
+
+	; Left
+	if eval (GetLSX < -0.1 || ((Goo1.AuxVarGetFlt "*OblLock_Flt" 1) - fMouseX) > 35) && GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pick_x" > 0
+		Call (CompileScript "OblivionLockpicking\InputHandler.gek") 4
+
+	; Right
+	elseif eval (GetLSX > 0.1 || ((Goo1.AuxVarGetFlt "*OblLock_Flt" 1) - fMouseX) < -35) && GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pick_x" < 4
+		Call (CompileScript "OblivionLockpicking\InputHandler.gek") 8
+
+	; Up
+	elseif eval GetLSY > 0.1 || ((Goo1.AuxVarGetFlt "*OblLock_Flt" 2) - fMouseY) > 20
+		Call (CompileScript "OblivionLockpicking\InputHandler.gek") 1
+	endif
+
+	Goo1.AuxVarSetFlt "*OblLock_Flt" fMouseX 1
+	Goo1.AuxVarSetFlt "*OblLock_Flt" fMouseY 2
+
+end

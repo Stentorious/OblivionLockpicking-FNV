@@ -1,0 +1,19 @@
+begin Function {}
+
+	; Close Menu
+	CloseActiveMenu
+	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\visible" 0
+
+	; Remove input loop
+	SetGameMainLoopCallback (CompileScript "OblivionLockpicking\InputLoop.gek") 0
+
+	; Enable controls
+	EK 17							; W
+	EK 30							; A
+	EK 31							; S
+	EK 32							; D
+	CallAfter 0.25 ({} => EK 18) 1	; E
+	CallAfter 0.25 ({} => EK 33) 1	; F
+	SetStickDisabled 1 0			; Right Stick
+
+end

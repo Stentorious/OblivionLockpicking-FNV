@@ -1,0 +1,11 @@
+begin Function {}
+
+	if eval (IsButtonPressed 4 || IsKeyPressed 30 2) && GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pick_x" > 0
+		Call (CompileScript "OblivionLockpicking\InputHandler.gek") 4
+	elseif eval (IsButtonPressed 8 || IsKeyPressed 32 2) && GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_anim_pick_x" < 4
+		Call (CompileScript "OblivionLockpicking\InputHandler.gek") 8
+	elseif eval IsButtonPressed 1 || IsKeyPressed 17 2
+		Call (CompileScript "OblivionLockpicking\InputHandler.gek") 1
+	endif
+
+end

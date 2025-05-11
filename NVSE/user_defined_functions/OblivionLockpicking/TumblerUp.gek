@@ -1,0 +1,14 @@
+int iIndex
+float fSpeed
+
+float fAnimStage
+
+begin Function {iIndex, fSpeed}
+
+	fAnimStage = GetMinOf 0.975 (GetUIFloatAlt ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iIndex))
+	SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iIndex) fAnimStage
+	SetUIFloatGradual ("HUDMainMenu\OblivionLockpicking\_anim_pin_" + $iIndex) fAnimStage 1 (GetMaxOf fSpeed 0.05)
+	PlaySound UILockpickingCylinderSqueakA 1
+	PlaySound UILockpickingCylinderStop 1
+
+end

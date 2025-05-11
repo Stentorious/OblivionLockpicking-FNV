@@ -1,0 +1,1056 @@
+<rect name="OblivionLockpicking">
+
+	<visible> 0 </visible>
+	<locus> 1 </locus>
+	<depth> 10 </depth>
+
+	<_scale> 1.4 </_scale>
+
+	<_gear_speed> 0.525 </_gear_speed>
+	<_lock_level> 0 </_lock_level>
+	<_index_tumbler> 0 </_index_tumbler>
+	<_set_tumblers>
+		<copy src="me()" trait="_lock_pin_0" />
+		<add src="me()" trait="_lock_pin_1" />
+		<add src="me()" trait="_lock_pin_2" />
+		<add src="me()" trait="_lock_pin_3" />
+		<add src="me()" trait="_lock_pin_4" />
+	</_set_tumblers>
+
+	<_anim_unlock> 0 </_anim_unlock>
+	<_anim_pick_x> 0 </_anim_pick_x>
+	<_anim_pick_y> 1 </_anim_pick_y>
+
+	<_lock_pin_0> 0 </_lock_pin_0>
+	<_lock_pin_1> 0 </_lock_pin_1>
+	<_lock_pin_2> 0 </_lock_pin_2>
+	<_lock_pin_3> 0 </_lock_pin_3>
+	<_lock_pin_4> 0 </_lock_pin_4>
+	<_anim_pin_0> 0 </_anim_pin_0>
+	<_anim_pin_1> 0 </_anim_pin_1>
+	<_anim_pin_2> 0 </_anim_pin_2>
+	<_anim_pin_3> 0 </_anim_pin_3>
+	<_anim_pin_4> 0 </_anim_pin_4>
+
+	<_anim_pin_temp_0>
+		<copy src="me()" trait="_anim_pin_0"/>
+		<min> 1 </min>
+	</_anim_pin_temp_0>
+	<_anim_pin_temp_1>
+		<copy src="me()" trait="_anim_pin_1"/>
+		<min> 1 </min>
+	</_anim_pin_temp_1>
+	<_anim_pin_temp_2>
+		<copy src="me()" trait="_anim_pin_2"/>
+		<min> 1 </min>
+	</_anim_pin_temp_2>
+	<_anim_pin_temp_3>
+		<copy src="me()" trait="_anim_pin_3"/>
+		<min> 1 </min>
+	</_anim_pin_temp_3>
+	<_anim_pin_temp_4>
+		<copy src="me()" trait="_anim_pin_4"/>
+		<min> 1 </min>
+	</_anim_pin_temp_4>
+
+
+	<_anim_pin_break> 0 </_anim_pin_break>
+	<_spark_0> Spark_0.dds </_spark_0>
+	<_spark_1> Spark_1.dds </_spark_1>
+	<_spark_2> Spark_2.dds </_spark_2>
+	<_spark_3> Spark_3.dds </_spark_3>
+	<_spark_4> Spark_4.dds </_spark_4>
+	<_spark_5> Spark_5.dds </_spark_5>
+	<_spark_6> Spark_6.dds </_spark_6>
+	<_spark_7> Spark_7.dds </_spark_7>
+	<_spark_8> Spark_8.dds </_spark_8>
+	<_spark_9> Spark_9.dds </_spark_9>
+	<_spark_10> Spark_10.dds </_spark_10>
+	<_spark_11> Spark_11.dds </_spark_11>
+	<_spark_12> Spark_12.dds </_spark_12>
+	<_spark_13> Spark_13.dds </_spark_13>
+	<_spark_14> Spark_14.dds </_spark_14>
+	<_spark_15> Spark_15.dds </_spark_15>
+	<_spark_16> Spark_16.dds </_spark_16>
+	<_spark_17> Spark_17.dds </_spark_17>
+	<_spark_18> Spark_18.dds </_spark_18>
+	<_spark_19> Spark_19.dds </_spark_19>
+	<_spark_20> Spark_20.dds </_spark_20>
+	<_spark_21> Spark_21.dds </_spark_21>
+	<_spark_22> Spark_22.dds </_spark_22>
+	<_spark_23> Spark_23.dds </_spark_23>
+	<_spark_24> Spark_24.dds </_spark_24>
+	<_spark_25> Spark_25.dds </_spark_25>
+	<_spark_26> Spark_26.dds </_spark_26>
+	<_spark_27> Spark_27.dds </_spark_27>
+	<_spark_28> Spark_28.dds </_spark_28>
+	<_spark_29> Spark_29.dds </_spark_29>
+	<_spark_30> Spark_30.dds </_spark_30>
+	<_spark_31> Spark_31.dds </_spark_31>
+	<_spark_texture>
+		<copy src="me()" trait="_anim_pin_break"/>
+		<mul> 31.9999 </mul>
+		<copy src="me()" trait="_spark_"/>
+	</_spark_texture>
+
+	<rect name="Lock_Rect">
+		<visible> 1 </visible>
+		<locus> 1 </locus>
+		<depth> -6000 </depth>
+		<x>
+			<copy src="screen()" trait="width" />
+			<div> 2 </div>
+		</x>
+		<y>
+			<copy src="screen()" trait="height" />
+			<div> 2 </div>
+		</y>
+
+		<image name="Pick">
+			<visible> 1 </visible>
+			<alpha>
+				<copy> 255 </copy>
+				<mul>
+					<copy src="grandparent()" trait="_anim_pick_x" />
+					<add> 2.5 </add>
+					<div> 2.5 </div>
+				</mul>
+				<min> 255 </min>
+				<onlyifnot src="grandparent()" trait="_anim_pin_break" />
+			</alpha>
+			<depth>
+				<copy> 0 </copy>
+				<add> 2 </add>
+				<onlyif>
+					<copy src="grandparent()" trait="_anim_unlock" />
+					<lt> 0.1 </lt>
+				</onlyif>
+			</depth>
+			<x>
+				<copy> -505 </copy>
+				<add>
+					<copy> 45 </copy>
+					<mul src="grandparent()" trait="_anim_pick_x" />
+				</add>
+			</x>
+			<y>
+				<copy> 20 </copy>
+				<sub>
+					<copy> 30 </copy>
+					<mul>
+						<copy> 1 </copy>
+						<sub>
+							<copy> 2 </copy>
+							<mul>
+								<copy src="grandparent()" trait="_anim_pick_y" />
+								<sub> 0.5 </sub>
+								<abs></abs>
+							</mul>
+						</sub>
+					</mul>
+				</sub>
+			</y>
+			<width>
+				<copy> 512 </copy>
+				<mul> 0.6 </mul>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul> 0.6 </mul>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_PickA.dds </filename>
+		</image>
+
+		<image name="Pick_Break_Arm">
+			<visible> 1 </visible>
+			<alpha>
+				<copy> 0 </copy>
+				<add>
+					<copy> 765 </copy>
+					<sub>
+						<copy src="grandparent()" trait="_anim_pin_break" />
+						<mul> 765 </mul>
+					</sub>
+					<min> 255 </min>
+					<onlyif src="grandparent()" trait="_anim_pin_break" />
+				</add>
+			</alpha>
+			<depth> 3 </depth>
+			<x>
+				<copy src="sibling(Pick)" trait="x" />
+				<sub> 2 </sub>
+				<sub>
+					<copy> 30 </copy>
+					<mul src="grandparent()" trait="_anim_pin_break" />
+				</sub>
+			</x>
+			<y>
+				<copy src="sibling(Pick)" trait="y" />
+				<add> 0.5 </add>
+				<add>
+					<copy> 300 </copy>
+					<mul src="grandparent()" trait="_anim_pin_break" />
+				</add>
+			</y>
+			<rotateaxisx>
+				<copy src="me()" trait="width" />
+				<div> 2 </div>
+			</rotateaxisx>
+			<rotateaxisy>
+				<copy src="me()" trait="height" />
+				<div> 2 </div>
+			</rotateaxisy>
+			<rotateangle>
+				<copy> 6.2831 </copy>
+				<div> 16 </div>
+				<mul src="grandparent()" trait="_anim_pin_break" />
+			</rotateangle>
+			<width> <copy src="sibling(Pick)" trait="width" /> </width>
+			<height> <copy src="sibling(Pick)" trait="height" /> </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_PickB.dds </filename>
+		</image>
+
+		<image name="Pick_Break_End">
+			<visible> 1 </visible>
+			<alpha> <copy src="sibling(Pick_Break_Arm)" trait="alpha" />  </alpha>
+			<depth> 3 </depth>
+			<x>
+				<copy src="sibling(Pick)" trait="x" />
+				<add>
+					<copy src="sibling(Pick)" trait="width" />
+					<mul> 0.852539 </mul>
+				</add>
+				<add>
+					<copy> 20 </copy>
+					<mul src="grandparent()" trait="_anim_pin_break" />
+				</add>
+			</x>
+			<y>
+				<copy src="sibling(Pick)" trait="y" />
+				<sub> 0.5 </sub>
+				<add>
+					<copy> 250 </copy>
+					<mul src="grandparent()" trait="_anim_pin_break" />
+				</add>
+			</y>
+			<rotateaxisx>
+				<copy src="me()" trait="width" />
+				<div> 2 </div>
+			</rotateaxisx>
+			<rotateaxisy> <copy src="sibling(Pick_Break_Arm)" trait="rotateaxisy" /> </rotateaxisy>
+			<rotateangle>
+				<copy src="sibling(Pick_Break_Arm)" trait="rotateangle" />
+				<mul> -1 </mul>
+			</rotateangle>
+			<width>
+				<copy src="sibling(Pick)" trait="width" />
+				<div> 4 </div>
+			</width>
+			<height> <copy src="sibling(Pick)" trait="height" /> </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_PickC.dds </filename>
+		</image>
+
+		<image name="Pick_Break_Spark">
+			<visible> 1 </visible>
+			<alpha> <copy src="sibling(Pick_Break_Arm)" trait="alpha" />  </alpha>
+			<depth> 4 </depth>
+			<x>
+				<copy src="sibling(Pick)" trait="x" />
+				<add>
+					<copy src="sibling(Pick)" trait="width" />
+					<mul> 0.852539 </mul>
+					<add> 10 </add>
+				</add>
+				<sub>
+					<copy src="me()" trait="height" />
+					<div> 2 </div>
+				</sub>
+			</x>
+			<y>
+				<copy> 80 </copy>
+				<sub>
+					<copy src="me()" trait="height" />
+					<div> 2 </div>
+				</sub>
+			</y>
+			<width> 256 </width>
+			<height> 256 </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 231 </green>
+			<blue> 145 </blue>
+			<filename> <copy src="grandparent()" trait="_spark_texture" /> </filename>
+			<texatlas> Interface\Stentorious\OblivionLockpicking\Lockpick_Sparks_Flipbook.tai </texatlas>
+		</image>
+
+
+		<image name="Base">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> -1 </depth>
+			<x>
+				<copy> 0 </copy>
+				<sub src="me()" trait="width" />
+				<div> 2 </div>
+			</x>
+			<y>
+				<copy> 0 </copy>
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+			</y>
+			<width>
+				<copy> 256 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 512 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Base.dds </filename>
+		</image>
+
+		<image name="Bolt">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 1 </depth>
+			<x>
+				<copy src="sibling(Base)" trait="x" />
+				<sub>
+					<copy> 93 </copy>
+					<mul src="grandparent()" trait="_anim_unlock" />
+					<add> 77.5 </add>
+					<mul src="grandparent()" trait="_scale" />
+				</sub>
+			</x>
+			<y>
+				<copy src="sibling(Base)" trait="y" />
+				<add>
+					<copy src="sibling(Base)" trait="height" />
+					<div> 2 </div>
+					<sub>
+						<copy> 44.25 </copy>
+						<mul src="grandparent()" trait="_scale" />
+					</sub>
+				</add>
+			</y>
+			<width>
+				<copy> 512 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<mul> 0.9 </mul>
+			</width>
+			<height>
+				<copy> 171 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<mul> 0.9 </mul>
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Bolt.dds </filename>
+		</image>
+
+		<image name="Loop">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x>
+				<copy> 178.5 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</x>
+			<y>
+				<copy> -60 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</y>
+			<width>
+				<copy> 64 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 171 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Loop.dds </filename>
+		</image>
+
+		<image name="Gear_0">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x>
+				<copy> -4 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<sub src="me()" trait="width" />
+			</x>
+			<y>
+				<copy> 318 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Base)" trait="y" />
+			</y>
+			<rotateaxisx>
+				<copy src="me()" trait="width" />
+				<div> 2 </div>
+			</rotateaxisx>
+			<rotateaxisy>
+				<copy src="me()" trait="height" />
+				<div> 2 </div>
+			</rotateaxisy>
+			<rotateangle>
+				<copy> 6.2831 </copy>
+				<mul src="grandparent()" trait="_gear_speed" />
+				<mul src="grandparent()" trait="_anim_unlock" />
+				<add> 0.04 </add>
+			</rotateangle>
+			<width>
+				<copy> 128 </copy>
+				<mul> 0.6 </mul>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height> <copy src="me()" trait="width" /> </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Gear.dds </filename>
+		</image>
+
+		<image name="Gear_1">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x>
+				<copy> 4 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</x>
+			<y> <copy src="sibling(Gear_0)" trait="y" /> </y>
+			<rotateaxisx><copy src="sibling(Gear_0)" trait="rotateaxisx" /> </rotateaxisx>
+			<rotateaxisy> <copy src="sibling(Gear_0)" trait="rotateaxisy" /> </rotateaxisy>
+			<rotateangle>
+				<copy> 6.2831 </copy>
+				<mul src="grandparent()" trait="_gear_speed" />
+				<mul src="grandparent()" trait="_anim_unlock" />
+				<add> 0.29 </add>
+			</rotateangle>
+			<width> <copy src="sibling(Gear_0)" trait="width" /> </width>
+			<height> <copy src="me()" trait="width" /> </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 255 </red>
+			<green> 255 </green>
+			<blue> 255 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Gear.dds </filename>
+		</image>
+
+		<image name="Tumbler_0">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x> -104.75 </x>
+			<y>
+				<copy> -75 </copy>
+				<sub>
+					<copy> 53 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_0" />
+				</sub>
+			</y>
+			<width>
+				<copy> 21.5 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red>
+				<copy> 255 </copy>
+				<sub>
+					<copy> 175 </copy>
+					<mul src="grandparent()" trait="_lock_pin_0" />
+				</sub>
+			</red>
+			<green> <copy src="me()" trait="red" /> </green>
+			<blue> <copy src="me()" trait="red" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Tumbler.dds </filename>
+		</image>
+
+		<image name="Tumbler_1">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x> -58.75 </x>
+			<y>
+				<copy> -75 </copy>
+				<sub>
+					<copy> 53 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_1" />
+				</sub>
+			</y>
+			<width>
+				<copy> 21.5 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red>
+				<copy> 255 </copy>
+				<sub>
+					<copy> 175 </copy>
+					<mul src="grandparent()" trait="_lock_pin_1" />
+				</sub>
+			</red>
+			<green> <copy src="me()" trait="red" /> </green>
+			<blue> <copy src="me()" trait="red" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Tumbler.dds </filename>
+		</image>
+
+		<image name="Tumbler_2">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x> -14.75 </x>
+			<y>
+				<copy> -75 </copy>
+				<sub>
+					<copy> 53 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_2" />
+				</sub>
+			</y>
+			<width>
+				<copy> 21.5 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red>
+				<copy> 255 </copy>
+				<sub>
+					<copy> 175 </copy>
+					<mul src="grandparent()" trait="_lock_pin_2" />
+				</sub>
+			</red>
+			<green> <copy src="me()" trait="red" /> </green>
+			<blue> <copy src="me()" trait="red" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Tumbler.dds </filename>
+		</image>
+
+		<image name="Tumbler_3">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x> 30.25 </x>
+			<y>
+				<copy> -75 </copy>
+				<sub>
+					<copy> 53 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_3" />
+				</sub>
+			</y>
+			<width>
+				<copy> 21.5 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red>
+				<copy> 255 </copy>
+				<sub>
+					<copy> 175 </copy>
+					<mul src="grandparent()" trait="_lock_pin_3" />
+				</sub>
+			</red>
+			<green> <copy src="me()" trait="red" /> </green>
+			<blue> <copy src="me()" trait="red" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Tumbler.dds </filename>
+		</image>
+
+		<image name="Tumbler_4">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 2 </depth>
+			<x> 76.25 </x>
+			<y>
+				<copy> -75 </copy>
+				<sub>
+					<copy> 53 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_4" />
+				</sub>
+			</y>
+			<width>
+				<copy> 21.5 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 64 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red>
+				<copy> 255 </copy>
+				<sub>
+					<copy> 175 </copy>
+					<mul src="grandparent()" trait="_lock_pin_4" />
+				</sub>
+			</red>
+			<green> <copy src="me()" trait="red" /> </green>
+			<blue> <copy src="me()" trait="red" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Tumbler.dds </filename>
+		</image>
+
+		<image name="Spring_0">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 1 </depth>
+			<x> -103 </x>
+			<y> -130 </y>
+			<width>
+				<copy> 19 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 58 </copy>
+				<sub>
+					<copy> 36 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_0" />
+				</sub>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> <copy src="sibling(Tumbler_0)" trait="red" /> </red>
+			<green> <copy src="sibling(Tumbler_0)" trait="green" /> </green>
+			<blue> <copy src="sibling(Tumbler_0)" trait="blue" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Spring.dds </filename>
+		</image>
+
+		<image name="Spring_1">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 1 </depth>
+			<x> -57 </x>
+			<y> -130 </y>
+			<width>
+				<copy> 19 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 58 </copy>
+				<sub>
+					<copy> 36 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_1" />
+				</sub>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> <copy src="sibling(Tumbler_1)" trait="red" /> </red>
+			<green> <copy src="sibling(Tumbler_1)" trait="green" /> </green>
+			<blue> <copy src="sibling(Tumbler_1)" trait="blue" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Spring.dds </filename>
+		</image>
+
+		<image name="Spring_2">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 1 </depth>
+			<x> -13 </x>
+			<y> -130 </y>
+			<width>
+				<copy> 19 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 58 </copy>
+				<sub>
+					<copy> 36 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_2" />
+				</sub>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> <copy src="sibling(Tumbler_2)" trait="red" /> </red>
+			<green> <copy src="sibling(Tumbler_2)" trait="green" /> </green>
+			<blue> <copy src="sibling(Tumbler_2)" trait="blue" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Spring.dds </filename>
+		</image>
+
+		<image name="Spring_3">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 1 </depth>
+			<x> 32 </x>
+			<y> -130 </y>
+			<width>
+				<copy> 19 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 58 </copy>
+				<sub>
+					<copy> 36 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_3" />
+				</sub>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> <copy src="sibling(Tumbler_3)" trait="red" /> </red>
+			<green> <copy src="sibling(Tumbler_3)" trait="green" /> </green>
+			<blue> <copy src="sibling(Tumbler_3)" trait="blue" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Spring.dds </filename>
+		</image>
+
+		<image name="Spring_4">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 1 </depth>
+			<x> 78 </x>
+			<y> -130 </y>
+			<width>
+				<copy> 19 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height>
+				<copy> 58 </copy>
+				<sub>
+					<copy> 36 </copy>
+					<mul src="grandparent()" trait="_anim_pin_temp_4" />
+				</sub>
+				<mul src="grandparent()" trait="_scale" />
+			</height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> <copy src="sibling(Tumbler_4)" trait="red" /> </red>
+			<green> <copy src="sibling(Tumbler_4)" trait="green" /> </green>
+			<blue> <copy src="sibling(Tumbler_4)" trait="blue" /> </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Spring.dds </filename>
+		</image>
+
+		<image name="Shadow_0">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 4 </depth>
+			<x>
+				<copy src="sibling(Spring_0)" trait="x" />
+				<sub> 0.5 </sub>
+			</x>
+			<y> <copy src="sibling(Spring_0)" trait="y" /> </y>
+			<width> 27.8 </width>
+			<height> 27.8 </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 0 </red>
+			<green> 0 </green>
+			<blue> 0 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Shadow.dds </filename>
+		</image>
+		<image name="Shadow_1">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 4 </depth>
+			<x>
+				<copy src="sibling(Spring_1)" trait="x" />
+				<sub> 0.5 </sub>
+			</x>
+			<y> <copy src="sibling(Spring_1)" trait="y" /> </y>
+			<width> 27.8 </width>
+			<height> 27.8 </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 0 </red>
+			<green> 0 </green>
+			<blue> 0 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Shadow.dds </filename>
+		</image>
+		<image name="Shadow_2">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 4 </depth>
+			<x>
+				<copy src="sibling(Spring_2)" trait="x" />
+				<sub> 0.5 </sub>
+			</x>
+			<y> <copy src="sibling(Spring_2)" trait="y" /> </y>
+			<width> 27.8 </width>
+			<height> 27.8 </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 0 </red>
+			<green> 0 </green>
+			<blue> 0 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Shadow.dds </filename>
+		</image>
+		<image name="Shadow_3">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 4 </depth>
+			<x>
+				<copy src="sibling(Spring_3)" trait="x" />
+				<sub> 0.5 </sub>
+			</x>
+			<y> <copy src="sibling(Spring_3)" trait="y" /> </y>
+			<width> 27.8 </width>
+			<height> 27.8 </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 0 </red>
+			<green> 0 </green>
+			<blue> 0 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Shadow.dds </filename>
+		</image>
+		<image name="Shadow_4">
+			<visible> 1 </visible>
+			<alpha> 255 </alpha>
+			<depth> 4 </depth>
+			<x>
+				<copy src="sibling(Spring_4)" trait="x" />
+				<sub> 0.5 </sub>
+			</x>
+			<y> <copy src="sibling(Spring_4)" trait="y" /> </y>
+			<width> 27.8 </width>
+			<height> 27.8 </height>
+			<zoom> &scale; </zoom>
+			<systemcolor> 0 </systemcolor>
+			<red> 0 </red>
+			<green> 0 </green>
+			<blue> 0 </blue>
+			<filename> Interface\Stentorious\OblivionLockpicking\Lockpick_Shadow.dds </filename>
+		</image>
+
+	</rect>
+
+	<rect name="LPM_MainRect">
+		<locus> &true; </locus>
+		<x>
+			<copy src="screen" trait="width"/>
+			<sub src="me" trait="width"/>
+			<div> 2 </div>
+		</x>
+		<y>
+			<copy src="screen" trait="height"/>
+			<sub src="me" trait="height"/>
+			<div> 2 </div>
+		</y>
+		<width>
+			<copy src="screen" trait="width"/>
+			<sub>
+				<copy src="screen" trait="cropx"/>
+				<mul> 4 </mul>
+			</sub>
+		</width>
+		<height>
+			<copy src="screen" trait="height"/>
+			<sub>
+				<copy src="screen" trait="cropy"/>
+				<mul> 4 </mul>
+			</sub>
+		</height>
+
+		<rect name="LPM_InfoRect">
+			<x> 10 </x>
+			<y>
+				<copy src="parent" trait="height"/>
+				<sub src="me" trait="height"/>
+				<sub> 10 </sub>
+			</y>
+			<width> 400 </width>
+			<height> 175 </height>
+			<locus> &true; </locus>
+
+			<!-- Bracket -->
+			<image name="LPM_TopFadeLine">
+				<filename> Interface\Shared\Line\fade_to_top.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<zoom> &scale; </zoom>
+				<width> <copy src="globals" trait="_line_thickness"/> </width>
+				<height> 30 </height>
+			</image>
+
+			<image name="LPM_LeftBorder">
+				<filename> Interface\Shared\Line\solid.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<y> 28 </y>
+				<width> <copy src="globals" trait="_line_thickness"/> </width>
+				<height>
+					<copy src="parent" trait="height"/>
+					<sub> 30 </sub>
+				</height>
+			</image>
+
+			<image name="LPM_BottomBorder">
+				<filename> Interface\Shared\Line\solid.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<y>
+					<copy src="parent" trait="height"/>
+					<sub src="me" trait="height"/>
+				</y>
+				<height> <copy src="globals" trait="_line_thickness"/> </height>
+				<width>
+					<copy src="parent" trait="width"/>
+					<sub> 30 </sub>
+				</width>
+			</image>
+
+			<image name="LPM_RightFadeLine">
+				<filename> Interface\Shared\Line\fade_to_right.dds </filename>
+				<texatlas> Interface\InterfaceShared.tai </texatlas>
+				<zoom> &scale; </zoom>
+				<x> <copy src="sibling(LPM_BottomBorder)" trait="width"/> <sub> 2 </sub> </x>
+				<y> <copy src="sibling(LPM_BottomBorder)" trait="y"/> </y>
+				<height> <copy src="globals" trait="_line_thickness"/> </height>
+				<width> 30 </width>
+			</image>
+
+			<rect name="LPM_SkillDisplay">
+				<_Value> -1 </_Value>
+
+				<x> 20 </x>
+				<y> 35 </y>
+				<width>
+					<copy src="parent" trait="width"/>
+					<sub> 80 </sub>
+				</width>
+				<locus> &true; </locus>
+
+				<text name="LPM_SkillTitle">
+					<font> 7 </font>
+					<string> &-sLockpickSkillText; </string>
+				</text>
+
+				<text name="LPM_SkillValue">
+					<font> 7 </font>
+					<string> <copy src="parent" trait="_Value"/> </string>
+					<justify> &right; </justify>
+					<x> <copy src="parent" trait="width"/> </x>
+				</text>
+			</rect>
+
+			<rect name="LPM_PickCountDisplay">
+				<_Value> -1 </_Value>
+
+				<x> 20 </x>
+				<y> 80 </y>
+				<width> <copy src="sibling(LPM_SkillDisplay)" trait="width"/> </width>
+				<locus> &true; </locus>
+
+				<text name="LPM_PickCountTitle">
+					<font> 7 </font>
+					<string> &-sPicksRemainingText; </string>
+				</text>
+
+				<text name="LPM_PickCountValue">
+					<font> 7 </font>
+					<string> <copy src="parent" trait="_Value"/> </string>
+					<justify> &right; </justify>
+					<x> <copy src="parent" trait="width"/> </x>
+				</text>
+			</rect>
+
+			<rect name="LPM_LevelDisplay">
+				<_Value> -1 </_Value>
+
+				<x> 20 </x>
+				<y> 125 </y>
+				<width> <copy src="sibling(LPM_SkillDisplay)" trait="width"/> </width>
+				<locus> &true; </locus>
+
+				<text name="LPM_LevelTitle">
+					<font> 7 </font>
+					<string> &-sLockLevelText; </string>
+				</text>
+
+				<text name="LPM_LevelValue">
+					<font> 7 </font>
+					<string> <copy src="parent" trait="_Value"/> </string>
+					<justify> &right; </justify>
+					<x> <copy src="parent" trait="width"/> </x>
+				</text>
+			</rect>
+		</rect>
+
+		<rect name="LPM_ButtonRect">
+			<x>
+				<copy src="parent" trait="width"/>
+				<sub> 50 </sub>
+			</x>
+			<y>
+				<copy src="sibling(LPM_InfoRect)" trait="y"/>
+				<add> 72 </add>
+			</y>
+			<locus> &true; </locus>
+			<depth> 6 </depth>
+
+			<hotrect name="LPM_ForceLockButton">
+				<include src="text_box.xml"/>
+				<target> &true; </target>
+				<_xbox_button> &xbuttonx; </_xbox_button>
+				<string> </string>
+				<justify> &right; </justify>
+				<_glow> &true; </_glow>
+				<_verbuf> 9 </_verbuf>
+				<_PCButtonText> F) </_PCButtonText>
+			</hotrect>
+
+			<hotrect name="LPM_ExitButton">
+				<include src="text_box.xml"/>
+				<target> &true; </target>
+				<_y>
+					<copy src="sibling(LPM_ForceLockButton)" trait="_y"/>
+					<add src="sibling(LPM_ForceLockButton)" trait="height"/>
+				</_y>
+				<_xbox_button> &xbuttonb; </_xbox_button>
+				<string> &-sExit; </string>
+				<justify> &right; </justify>
+				<_glow> &true; </_glow>
+				<_verbuf> 9 </_verbuf>
+				<_PCButtonText> E) </_PCButtonText>
+			</hotrect>
+		</rect>
+
+	</rect>
+</rect>

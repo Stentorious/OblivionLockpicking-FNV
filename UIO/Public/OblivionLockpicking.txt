@@ -1,0 +1,4 @@
+Stentorious\OblivionLockpicking\HUDMainMenu\Main.xml::HUDMainMenu
+true
+Stentorious\OblivionLockpicking\LockPickMenu\_Root.xml::LockPickMenu
+true
