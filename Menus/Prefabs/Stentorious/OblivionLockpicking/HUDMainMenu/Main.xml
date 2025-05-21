@@ -5,6 +5,7 @@
 	<depth> 10 </depth>
 
 	<_scale> 1.4 </_scale>
+	<_fade_in> 255 </_fade_in>
 
 	<_gear_speed> 0.525 </_gear_speed>
 	<_lock_level> 0 </_lock_level>
@@ -109,12 +110,9 @@
 		<image name="Pick">
 			<visible> 1 </visible>
 			<alpha>
-				<copy> 255 </copy>
-				<mul>
-					<copy src="grandparent()" trait="_anim_pick_x" />
-					<add> 2.5 </add>
-					<div> 2.5 </div>
-				</mul>
+				<copy src="grandparent()" trait="_anim_pick_x" />
+				<add> 2.5 </add>
+				<mul> 102 </mul>
 				<min> 255 </min>
 				<onlyifnot src="grandparent()" trait="_anim_pin_break" />
 			</alpha>
@@ -127,16 +125,16 @@
 				</onlyif>
 			</depth>
 			<x>
-				<copy> -505 </copy>
-				<add>
-					<copy> 45 </copy>
-					<mul src="grandparent()" trait="_anim_pick_x" />
-				</add>
+				<copy> 32.142857 </copy>
+				<mul src="grandparent()" trait="_anim_pick_x" />
+				<sub> 232.7142857 </sub>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(base)" trait="x" />
 			</x>
 			<y>
-				<copy> 20 </copy>
+				<copy> 270.2857 </copy>
 				<sub>
-					<copy> 30 </copy>
+					<copy> 21.42857 </copy>
 					<mul>
 						<copy> 1 </copy>
 						<sub>
@@ -149,6 +147,8 @@
 						</sub>
 					</mul>
 				</sub>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(base)" trait="y" />
 			</y>
 			<width>
 				<copy> 512 </copy>
@@ -187,7 +187,8 @@
 				<copy src="sibling(Pick)" trait="x" />
 				<sub> 2 </sub>
 				<sub>
-					<copy> 30 </copy>
+					<copy> 21.42857 </copy>
+					<mul src="grandparent()" trait="_scale" />
 					<mul src="grandparent()" trait="_anim_pin_break" />
 				</sub>
 			</x>
@@ -195,7 +196,8 @@
 				<copy src="sibling(Pick)" trait="y" />
 				<add> 0.5 </add>
 				<add>
-					<copy> 300 </copy>
+					<copy> 214.2857 </copy>
+					<mul src="grandparent()" trait="_scale" />
 					<mul src="grandparent()" trait="_anim_pin_break" />
 				</add>
 			</y>
@@ -233,7 +235,8 @@
 					<mul> 0.852539 </mul>
 				</add>
 				<add>
-					<copy> 20 </copy>
+					<copy> 14.2857 </copy>
+					<mul src="grandparent()" trait="_scale" />
 					<mul src="grandparent()" trait="_anim_pin_break" />
 				</add>
 			</x>
@@ -241,7 +244,8 @@
 				<copy src="sibling(Pick)" trait="y" />
 				<sub> 0.5 </sub>
 				<add>
-					<copy> 250 </copy>
+					<copy> 178.57 </copy>
+					<mul src="grandparent()" trait="_scale" />
 					<mul src="grandparent()" trait="_anim_pin_break" />
 				</add>
 			</y>
@@ -272,11 +276,12 @@
 			<alpha> <copy src="sibling(Pick_Break_Arm)" trait="alpha" />  </alpha>
 			<depth> 4 </depth>
 			<x>
-				<copy src="sibling(Pick)" trait="x" />
+				<copy> 7.142857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Pick)" trait="x" />
 				<add>
 					<copy src="sibling(Pick)" trait="width" />
 					<mul> 0.852539 </mul>
-					<add> 10 </add>
 				</add>
 				<sub>
 					<copy src="me()" trait="height" />
@@ -284,14 +289,19 @@
 				</sub>
 			</x>
 			<y>
-				<copy> 80 </copy>
+				<copy> 313.142857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Base)" trait="y" />
 				<sub>
 					<copy src="me()" trait="height" />
 					<div> 2 </div>
 				</sub>
 			</y>
-			<width> 256 </width>
-			<height> 256 </height>
+			<width>
+				<copy> 182.857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height> <copy src="me()" trait="width" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red> 255 </red>
@@ -301,10 +311,9 @@
 			<texatlas> Interface\Stentorious\OblivionLockpicking\Lockpick_Sparks_Flipbook.tai </texatlas>
 		</image>
 
-
 		<image name="Base">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> -1 </depth>
 			<x>
 				<copy> 0 </copy>
@@ -334,7 +343,7 @@
 
 		<image name="Bolt">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 1 </depth>
 			<x>
 				<copy src="sibling(Base)" trait="x" />
@@ -357,14 +366,12 @@
 				</add>
 			</y>
 			<width>
-				<copy> 512 </copy>
+				<copy> 460.8 </copy>
 				<mul src="grandparent()" trait="_scale" />
-				<mul> 0.9 </mul>
 			</width>
 			<height>
-				<copy> 171 </copy>
+				<copy> 153.9 </copy>
 				<mul src="grandparent()" trait="_scale" />
-				<mul> 0.9 </mul>
 			</height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
@@ -376,7 +383,7 @@
 
 		<image name="Loop">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
 			<x>
 				<copy> 178.5 </copy>
@@ -404,7 +411,7 @@
 
 		<image name="Gear_0">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
 			<x>
 				<copy> -4 </copy>
@@ -446,7 +453,7 @@
 
 		<image name="Gear_1">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
 			<x>
 				<copy> 4 </copy>
@@ -473,15 +480,21 @@
 
 		<image name="Tumbler_0">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
-			<x> -104.75 </x>
+			<x>
+				<copy> 53.17857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Base)" trait="x" />
+			</x>
 			<y>
-				<copy> -75 </copy>
+				<copy> 202.42857 </copy>
 				<sub>
-					<copy> 53 </copy>
+					<copy> 37.857 </copy>
 					<mul src="grandparent()" trait="_anim_pin_temp_0" />
 				</sub>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(base)" trait="y" />
 			</y>
 			<width>
 				<copy> 21.5 </copy>
@@ -507,24 +520,24 @@
 
 		<image name="Tumbler_1">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
-			<x> -58.75 </x>
+			<x>
+				<copy> 32.857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Tumbler_0)" trait="x" />
+			</x>
 			<y>
-				<copy> -75 </copy>
+				<copy> 202.42857 </copy>
 				<sub>
-					<copy> 53 </copy>
+					<copy> 37.857 </copy>
 					<mul src="grandparent()" trait="_anim_pin_temp_1" />
 				</sub>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(base)" trait="y" />
 			</y>
-			<width>
-				<copy> 21.5 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</width>
-			<height>
-				<copy> 64 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</height>
+			<width> <copy src="sibling(Tumbler_0)" trait="width" /> </width>
+			<height> <copy src="sibling(Tumbler_0)" trait="height" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red>
@@ -541,24 +554,24 @@
 
 		<image name="Tumbler_2">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
-			<x> -14.75 </x>
+			<x>
+				<copy> 31.42857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Tumbler_1)" trait="x" />
+			</x>
 			<y>
-				<copy> -75 </copy>
+				<copy> 202.42857 </copy>
 				<sub>
-					<copy> 53 </copy>
+					<copy> 37.857 </copy>
 					<mul src="grandparent()" trait="_anim_pin_temp_2" />
 				</sub>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(base)" trait="y" />
 			</y>
-			<width>
-				<copy> 21.5 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</width>
-			<height>
-				<copy> 64 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</height>
+			<width> <copy src="sibling(Tumbler_0)" trait="width" /> </width>
+			<height> <copy src="sibling(Tumbler_0)" trait="height" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red>
@@ -575,24 +588,24 @@
 
 		<image name="Tumbler_3">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
-			<x> 30.25 </x>
+			<x>
+				<copy> 32.142857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Tumbler_2)" trait="x" />
+			</x>
 			<y>
-				<copy> -75 </copy>
+				<copy> 202.42857 </copy>
 				<sub>
-					<copy> 53 </copy>
+					<copy> 37.857 </copy>
 					<mul src="grandparent()" trait="_anim_pin_temp_3" />
 				</sub>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(base)" trait="y" />
 			</y>
-			<width>
-				<copy> 21.5 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</width>
-			<height>
-				<copy> 64 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</height>
+			<width> <copy src="sibling(Tumbler_0)" trait="width" /> </width>
+			<height> <copy src="sibling(Tumbler_0)" trait="height" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red>
@@ -609,24 +622,24 @@
 
 		<image name="Tumbler_4">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 2 </depth>
-			<x> 76.25 </x>
+			<x>
+				<copy> 32.857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Tumbler_3)" trait="x" />
+			</x>
 			<y>
-				<copy> -75 </copy>
+				<copy> 202.42857 </copy>
 				<sub>
-					<copy> 53 </copy>
+					<copy> 37.857 </copy>
 					<mul src="grandparent()" trait="_anim_pin_temp_4" />
 				</sub>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(base)" trait="y" />
 			</y>
-			<width>
-				<copy> 21.5 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</width>
-			<height>
-				<copy> 64 </copy>
-				<mul src="grandparent()" trait="_scale" />
-			</height>
+			<width> <copy src="sibling(Tumbler_0)" trait="width" /> </width>
+			<height> <copy src="sibling(Tumbler_0)" trait="height" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red>
@@ -643,10 +656,20 @@
 
 		<image name="Spring_0">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 1 </depth>
-			<x> -103 </x>
-			<y> -130 </y>
+			<x>
+				<copy> 1.25 </copy>
+				<mul src="grandparent()" trait="_scale" />
+				<add src="sibling(Tumbler_0)" trait="x" />
+			</x>
+			<y>
+				<copy src="sibling(Base)" trait="y" />
+				<add>
+					<copy> 163.142 </copy>
+					<mul src="grandparent()" trait="_scale" />
+				</add>
+			</y>
 			<width>
 				<copy> 19 </copy>
 				<mul src="grandparent()" trait="_scale" />
@@ -669,14 +692,15 @@
 
 		<image name="Spring_1">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 1 </depth>
-			<x> -57 </x>
-			<y> -130 </y>
-			<width>
-				<copy> 19 </copy>
+			<x>
+				<copy> 1.25 </copy>
 				<mul src="grandparent()" trait="_scale" />
-			</width>
+				<add src="sibling(Tumbler_1)" trait="x" />
+			</x>
+			<y> <copy src="sibling(Spring_0)" trait="y" /> </y>
+			<width> <copy src="sibling(Spring_0)" trait="width" /> </width>
 			<height>
 				<copy> 58 </copy>
 				<sub>
@@ -695,14 +719,15 @@
 
 		<image name="Spring_2">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 1 </depth>
-			<x> -13 </x>
-			<y> -130 </y>
-			<width>
-				<copy> 19 </copy>
+			<x>
+				<copy> 1.25 </copy>
 				<mul src="grandparent()" trait="_scale" />
-			</width>
+				<add src="sibling(Tumbler_2)" trait="x" />
+			</x>
+			<y> <copy src="sibling(Spring_0)" trait="y" /> </y>
+			<width> <copy src="sibling(Spring_0)" trait="width" /> </width>
 			<height>
 				<copy> 58 </copy>
 				<sub>
@@ -721,14 +746,15 @@
 
 		<image name="Spring_3">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 1 </depth>
-			<x> 32 </x>
-			<y> -130 </y>
-			<width>
-				<copy> 19 </copy>
+			<x>
+				<copy> 1.25 </copy>
 				<mul src="grandparent()" trait="_scale" />
-			</width>
+				<add src="sibling(Tumbler_3)" trait="x" />
+			</x>
+			<y> <copy src="sibling(Spring_0)" trait="y" /> </y>
+			<width> <copy src="sibling(Spring_0)" trait="width" /> </width>
 			<height>
 				<copy> 58 </copy>
 				<sub>
@@ -747,14 +773,15 @@
 
 		<image name="Spring_4">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 1 </depth>
-			<x> 78 </x>
-			<y> -130 </y>
-			<width>
-				<copy> 19 </copy>
+			<x>
+				<copy> 1.25 </copy>
 				<mul src="grandparent()" trait="_scale" />
-			</width>
+				<add src="sibling(Tumbler_4)" trait="x" />
+			</x>
+			<y> <copy src="sibling(Spring_0)" trait="y" /> </y>
+			<width> <copy src="sibling(Spring_0)" trait="width" /> </width>
 			<height>
 				<copy> 58 </copy>
 				<sub>
@@ -773,15 +800,21 @@
 
 		<image name="Shadow_0">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 4 </depth>
 			<x>
 				<copy src="sibling(Spring_0)" trait="x" />
-				<sub> 0.5 </sub>
+				<sub>
+					<copy> 0.357 </copy>
+					<mul src="grandparent()" trait="_scale" />
+				</sub>
 			</x>
 			<y> <copy src="sibling(Spring_0)" trait="y" /> </y>
-			<width> 27.8 </width>
-			<height> 27.8 </height>
+			<width>
+				<copy> 19.857 </copy>
+				<mul src="grandparent()" trait="_scale" />
+			</width>
+			<height> <copy src="me()" trait="width" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red> 0 </red>
@@ -791,15 +824,18 @@
 		</image>
 		<image name="Shadow_1">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 4 </depth>
 			<x>
 				<copy src="sibling(Spring_1)" trait="x" />
-				<sub> 0.5 </sub>
+				<sub>
+					<copy> 0.357 </copy>
+					<mul src="grandparent()" trait="_scale" />
+				</sub>
 			</x>
 			<y> <copy src="sibling(Spring_1)" trait="y" /> </y>
-			<width> 27.8 </width>
-			<height> 27.8 </height>
+			<width> <copy src="sibling(Shadow_0)" trait="width" /> </width>
+			<height> <copy src="me()" trait="width" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red> 0 </red>
@@ -809,15 +845,18 @@
 		</image>
 		<image name="Shadow_2">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 4 </depth>
 			<x>
 				<copy src="sibling(Spring_2)" trait="x" />
-				<sub> 0.5 </sub>
+				<sub>
+					<copy> 0.357 </copy>
+					<mul src="grandparent()" trait="_scale" />
+				</sub>
 			</x>
 			<y> <copy src="sibling(Spring_2)" trait="y" /> </y>
-			<width> 27.8 </width>
-			<height> 27.8 </height>
+			<width> <copy src="sibling(Shadow_0)" trait="width" /> </width>
+			<height> <copy src="me()" trait="width" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red> 0 </red>
@@ -827,15 +866,18 @@
 		</image>
 		<image name="Shadow_3">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 4 </depth>
 			<x>
 				<copy src="sibling(Spring_3)" trait="x" />
-				<sub> 0.5 </sub>
+				<sub>
+					<copy> 0.357 </copy>
+					<mul src="grandparent()" trait="_scale" />
+				</sub>
 			</x>
 			<y> <copy src="sibling(Spring_3)" trait="y" /> </y>
-			<width> 27.8 </width>
-			<height> 27.8 </height>
+			<width> <copy src="sibling(Shadow_0)" trait="width" /> </width>
+			<height> <copy src="me()" trait="width" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red> 0 </red>
@@ -845,15 +887,18 @@
 		</image>
 		<image name="Shadow_4">
 			<visible> 1 </visible>
-			<alpha> 255 </alpha>
+			<alpha> <copy src="grandparent()" trait="_fade_in" /> </alpha>
 			<depth> 4 </depth>
 			<x>
 				<copy src="sibling(Spring_4)" trait="x" />
-				<sub> 0.5 </sub>
+				<sub>
+					<copy> 0.357 </copy>
+					<mul src="grandparent()" trait="_scale" />
+				</sub>
 			</x>
 			<y> <copy src="sibling(Spring_4)" trait="y" /> </y>
-			<width> 27.8 </width>
-			<height> 27.8 </height>
+			<width> <copy src="sibling(Shadow_0)" trait="width" /> </width>
+			<height> <copy src="me()" trait="width" /> </height>
 			<zoom> &scale; </zoom>
 			<systemcolor> 0 </systemcolor>
 			<red> 0 </red>

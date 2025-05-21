@@ -70,6 +70,10 @@ begin Function {iMenuID}
 	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\_PCButtonText" (GetUIString "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\_PCButtonText")
 	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\string" "%z [%g%%]" (GetStringSetting "sForceLock") (GetMaxOf 0 (GetMinOf 100 ((GetMaxOf 0 (GetMinOf 100 (Player.GetAV Lockpick))) + (Goo1.AuxVarGetFlt "*GS_fLockSkillBase") - iLockLevel)))
 
+	; Menu open animation
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_fade_in" 127 255 0.25
+	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_scale" 1 1.4 0.25
+
 	; Reset pick position
 	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_anim_pick_x" -2.5
 	if eval iPickCount > 0
