@@ -44,16 +44,21 @@ Goo1.AuxVarSetFlt "*OblLock_INI" (eval GetINIFloat_Cached "General:bDoorLocks" "
 Goo1.AuxVarSetFlt "*OblLock_INI" (eval GetINIFloat_Cached "General:bContainerLocks" "Stentorious\OblivionLockpicking.ini") 1
 Goo1.AuxVarSetFlt "*OblLock_INI" (eval GetINIFloat_Cached "Experimental:bMouseControls" "Stentorious\OblivionLockpicking.ini") 2
 Goo1.AuxVarSetFlt "*OblLock_INI" (GetMaxOf 0 (GetMinOf 1 (GetINIFloat_Cached "Difficulty:fFailedForceAttempt" "Stentorious\OblivionLockpicking.ini"))) 3
-Goo1.AuxVarSetFlt "*OblLock_INI" (eval GetINIFloat_Cached "Difficulty:bSkillBasedPinReset" "Stentorious\OblivionLockpicking.ini") 4
-Goo1.AuxVarSetFlt "*OblLock_INI" (GetMaxOf 0 (GetINIFloat_Cached "Developer:fMinRaiseTimeSkillLow" "Stentorious\OblivionLockpicking.ini")) 5
-Goo1.AuxVarSetFlt "*OblLock_INI" ((GetMaxOf (Goo1.AuxVarGetFlt "*OblLock_INI" 5) (GetINIFloat_Cached "Developer:fMinRaiseTimeSkillHigh" "Stentorious\OblivionLockpicking.ini")) - (Goo1.AuxVarGetFlt "*OblLock_INI" 5)) 6
-Goo1.AuxVarSetFlt "*OblLock_INI" (GetMaxOf 0 (GetINIFloat_Cached "Developer:fMaxRaiseTimeSkillLow" "Stentorious\OblivionLockpicking.ini")) 7
-Goo1.AuxVarSetFlt "*OblLock_INI" ((GetMaxOf (Goo1.AuxVarGetFlt "*OblLock_INI" 7) (GetINIFloat_Cached "Developer:fMaxRaiseTimeSkillHigh" "Stentorious\OblivionLockpicking.ini")) - (Goo1.AuxVarGetFlt "*OblLock_INI" 7)) 8
-Goo1.AuxVarSetFlt "*OblLock_INI" (GetMaxOf 0 (GetINIFloat_Cached "Developer:fPeakTimeMul" "Stentorious\OblivionLockpicking.ini")) 9
-CloseFileSO "Stentorious\PipBoyUITweaks.ini" 0
+Goo1.AuxVarSetFlt "*OblLock_INI" (GetINIFloat_Cached "Difficulty:iPinResetBehavior" "Stentorious\OblivionLockpicking.ini") 4
+Goo1.AuxVarSetFlt "*OblLock_INI" (GetMaxOf 0 (GetINIFloat_Cached "Difficulty:fMinRaiseTimeSkillLow" "Stentorious\OblivionLockpicking.ini")) 5
+Goo1.AuxVarSetFlt "*OblLock_INI" ((GetMaxOf (Goo1.AuxVarGetFlt "*OblLock_INI" 5) (GetINIFloat_Cached "Difficulty:fMinRaiseTimeSkillHigh" "Stentorious\OblivionLockpicking.ini")) - (Goo1.AuxVarGetFlt "*OblLock_INI" 5)) 6
+Goo1.AuxVarSetFlt "*OblLock_INI" (GetMaxOf 0 (GetINIFloat_Cached "Difficulty:fMaxRaiseTimeSkillLow" "Stentorious\OblivionLockpicking.ini")) 7
+Goo1.AuxVarSetFlt "*OblLock_INI" ((GetMaxOf (Goo1.AuxVarGetFlt "*OblLock_INI" 7) (GetINIFloat_Cached "Difficulty:fMaxRaiseTimeSkillHigh" "Stentorious\OblivionLockpicking.ini")) - (Goo1.AuxVarGetFlt "*OblLock_INI" 7)) 8
+Goo1.AuxVarSetFlt "*OblLock_INI" (GetMaxOf 0 (GetINIFloat_Cached "Difficulty:fPeakTimeMul" "Stentorious\OblivionLockpicking.ini")) 9
+CloseFileSO "Stentorious\OblivionLockpicking.ini" 0
 
 ; Cache GameSettings
 Goo1.AuxVarSetFlt "*GS_fLockSkillBase" (GetGS "fLockSkillBase")
+
+; Update tutorial messages
+SetFormDescription HelpLockpicking (GetINIString_Cached "Strings:sHelpLockpicking" "Stentorious\Translate\OblivionLockpicking.ini")
+SetFormDescription HelpLockpickingXBox (GetINIString_Cached "Strings:sHelpLockpickingXBox" "Stentorious\Translate\OblivionLockpicking.ini")
+CloseFileSO "Stentorious\Translate\OblivionLockpicking.ini" 0
 
 ; Disable menu sounds
 SetSoundTraitNumeric UILockpickingPickMovement 3 -100
