@@ -191,7 +191,7 @@ begin Function {iKeyID}
 				if eval Goo1.AuxVarGetFlt "*OblLock_INI" 4 == 1
 					iPinReset = GetRandomInRange 0 5
 				elseif eval Goo1.AuxVarGetFlt "*OblLock_INI" 4 == 2
-					iPinReset -= (Floor (iLockpickSkill / 25))
+					iPinReset -= (Flr (iLockpickSkill / 25))
 				endif
 				iIndex = (GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_lock_level" / 25) + 1
 				while (iIndex -= 1) > -1 && iPinReset > 0
