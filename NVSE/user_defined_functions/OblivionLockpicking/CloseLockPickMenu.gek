@@ -12,8 +12,22 @@ begin Function {}
 	EK 30							; A
 	EK 31							; S
 	EK 32							; D
-	CallAfter 0.25 ({} => EK 18) 1	; E
-	CallAfter 0.25 ({} => EK 33) 1	; F
 	SetStickDisabled 1 0			; Right Stick
+
+	CallAfter 0.25 (begin function {}
+		EK 18	; E
+		EK 33	; F
+		if eval GetUIFloatAlt "HUDMainMenu/JLM/_JLMVisible"
+			int iKey1 = GetGlobalVariable (EditorIDToFormID "JLMKey1")
+			int iKey2 = GetGlobalVariable (EditorIDToFormID "JLMKey2")
+			int iKey3 = GetGlobalVariable (EditorIDToFormID "JLMKey3")
+			if eval iKey1 == 18 || iKey2 == 18 || iKey3 == 18
+				DK 18
+			endif
+			if eval iKey1 == 33 || iKey2 == 33 || iKey3 == 33
+				DK 33
+			endif
+		endif
+	end)
 
 end
