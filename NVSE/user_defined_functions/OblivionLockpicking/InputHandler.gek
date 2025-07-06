@@ -31,14 +31,14 @@ begin Function {iKeyID}
 		return
 	endif
 
-	iLockpickSkill = GetMaxOf 0 (GetMinOf 100 (Player.GetAV Lockpick))
+	iLockpickSkill = Clamp (Player.GetAV Lockpick) 0 100
 	iLockpickCount = Player.GetItemCount Lockpick
 
 	; Force lock
 	if eval iKeyID == 33 || iKeyID == 16384
 
 		; Successful force
-		if eval (GetMaxOf 0 (GetMinOf 100 (iLockpickSkill + (Goo1.AuxVarGetFlt "*GS_fLockSkillBase") - (GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_lock_level")))) > (GetRandomInRange 0 100)
+		if eval (Clamp (iLockpickSkill + (Goo1.AuxVarGetFlt "*GS_fLockSkillBase") - (GetUIFloatAlt "HUDMainMenu\OblivionLockpicking\_lock_level")) 0 100) > (GetRandomInRange 0 100)
 
 			; Update tumbler position
 			iIndex = 5

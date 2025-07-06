@@ -26,7 +26,7 @@ begin Function {iMenuID}
 	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\visible" 1
 
 	; Update Force
-	SetNumericGameSetting "fLockSkillBase" 100
+	SetNumericGameSetting "fLockSkillBase" 1000
 
 	; Reset Aux Vars
 	Goo1.AuxVarSetFlt "*OblLock_Flt" 0 0
@@ -68,7 +68,7 @@ begin Function {iMenuID}
 	; Update button key string
 	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\_PCButtonText" (GetUIString "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ExitButton\_PCButtonText")
 	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\_PCButtonText" (GetUIString "LockPickMenu\NOGLOW_BRANCH\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\_PCButtonText")
-	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\string" "%z [%g%%]" (GetStringSetting "sForceLock") (GetMaxOf 0 (GetMinOf 100 ((GetMaxOf 0 (GetMinOf 100 (Player.GetAV Lockpick))) + (Goo1.AuxVarGetFlt "*GS_fLockSkillBase") - iLockLevel)))
+	SetUIStringAlt "HUDMainMenu\OblivionLockpicking\LPM_MainRect\LPM_ButtonRect\LPM_ForceLockButton\string" "%z [%g%%]" (GetStringSetting "sForceLock") (Clamp ((Clamp (Player.GetAV Lockpick) 0 100) + (Goo1.AuxVarGetFlt "*GS_fLockSkillBase") - iLockLevel) 0 100)
 
 	; Menu open animation
 	SetUIFloatGradual "HUDMainMenu\OblivionLockpicking\_fade_in" 127 255 0.25

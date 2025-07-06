@@ -1,7 +1,7 @@
 begin Function {}
 
 	; Close Menu
-	CloseActiveMenu
+	CallWhile ({} => CloseActiveMenu) ({} => GetActiveMenuMode != 0) 16
 	SetUIFloatAlt "HUDMainMenu\OblivionLockpicking\visible" 0
 
 	; Remove input loop
