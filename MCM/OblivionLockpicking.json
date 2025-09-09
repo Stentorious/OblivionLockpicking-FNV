@@ -1,0 +1,139 @@
+{
+    "modName": "OblivionLockpicking",
+    "displayName": "$modDisplayName",
+	"description": "$modDescription",
+    "saveFile": "Stentorious/OblivionLockpicking.ini",
+    "minMCMVersion": 1.00,
+    "minModVersion": 1.00,
+    "requirements": [
+        { "type": "file", "file": "NVSE/plugins/scripts/ln_OblivionLockpicking.txt" }
+    ],
+    "submenus": {
+        "0": {
+            "listTitle": "$modDisplayName",
+            "pageTitle": "$modDisplayName",
+            "active": 1,
+            "columns": 2,
+            "enable": 1,
+            "options": {
+                "1": {
+                    "title": "$General",
+                    "enable": 1,
+                    "type": 0
+				},
+                "3": {
+                    "title": "$DoorLocks",
+                    "enable": 1,
+                    "type": 5,
+                    "mouse": "$DoorLocksMouse",
+                    "vars": [{ "form": "Goo1", "auxVar": "*OblLock_INI", "key": 0, "configINI": "General:bDoorLocks", "default": 1 }]
+                },
+                "5": {
+                    "title": "$ContainerLocks",
+                    "enable": 1,
+                    "type": 5,
+                    "mouse": "$ContainerLocksMouse",
+                    "vars": [{ "form": "Goo1", "auxVar": "*OblLock_INI", "key": 1, "configINI": "General:bContainerLocks", "default": 1 }]
+                },
+                "7": {
+                    "title": "$MinigameChance",
+                    "enable": 1,
+                    "type": 2,
+                    "mouse": "$MinigameChanceMouse",
+                    "suffix": "%",
+                    "vars": [{ "form": "Goo1", "auxVar": "*OblLock_INI", "key": 10, "configINI": "General:iMinigameChance", "default": 100 }],
+                    "scale": { "valueDecimal": 0, "valueIncrement": 1, "valueMin": 0, "valueMax": 100, "suffix": "%" }
+                },
+
+                "11": {
+                    "title": "$Experimental",
+                    "enable": 1,
+                    "type": 0
+                },
+                "13": {
+                    "title": "$MouseControls",
+                    "enable": 1,
+                    "type": 5,
+                    "mouse": "$MouseControlsMouse",
+                    "vars": [{ "form": "Goo1", "auxVar": "*OblLock_INI", "key": 2, "configINI": "Experimental:bMouseControls", "default": 0 }]
+                },
+
+                "2": {
+                    "title": "$Difficulty",
+                    "enable": 1,
+                    "type": 0
+                },
+                "4": {
+                    "title": "$PinBehavior",
+                    "enable": 1,
+                    "type": 1,
+                    "mouse": "$PinBehaviorMouse",
+                    "vars": [{ "form": "Goo1", "auxVar": "*OblLock_INI", "key": 4, "configINI": "Difficulty:iPinResetBehavior", "default": 2 }],
+                    "strings" : [ "$DropAll", "$Randomize", "$PlayerSkill" ]
+                },
+                "6": {
+                    "title": "$RaiseTimeMin",
+                    "enable": 1,
+                    "type": 8,
+                    "mouse": "$RaiseTimeMinMouse",
+                    "vars": [
+                        { "form": "Goo1", "auxVar": "*OblLock_INI", "key": 5, "configINI": "Difficulty:fRaiseTimeMinBase", "default": 0.05 },
+                        { "form": "Goo1", "auxVar": "*OblLock_INI", "key": 6, "configINI": "Difficulty:fRaiseTimeMinSkill", "default": 0 }
+                    ],
+                    "scale": {
+                        "setting1": "$Base",
+                        "setting2": "$Skill",
+                        "value1Decimal": 2,
+                        "value2Decimal": 2,
+                        "value1Increment": 0.01,
+                        "value2Increment": 0.01,
+                        "value1Min": 0.0,
+                        "value2Min": 0.0,
+                        "value1Max": 0.5,
+                        "value2Max": 0.5
+                    }
+                },
+                "8": {
+                    "title": "$RaiseTimeMax",
+                    "enable": 1,
+                    "type": 8,
+                    "mouse": "$RaiseTimeMaxMouse",
+                    "vars": [
+                        { "form": "Goo1", "auxVar": "*OblLock_INI", "key": 7, "configINI": "Difficulty:fRaiseTimeMaxBase", "default": 0.15 },
+                        { "form": "Goo1", "auxVar": "*OblLock_INI", "key": 8, "configINI": "Difficulty:fRaiseTimeMaxSkill", "default": 0.15 }
+                    ],
+                    "scale": {
+                        "setting1": "$Base",
+                        "setting2": "$Skill",
+                        "value1Decimal": 2,
+                        "value2Decimal": 2,
+                        "value1Increment": 0.01,
+                        "value2Increment": 0.01,
+                        "value1Min": 0.0,
+                        "value2Min": 0.0,
+                        "value1Max": 0.5,
+                        "value2Max": 0.5
+                    }
+                },
+                "10": {
+                    "title": "$PeakTimeMultiplier",
+                    "enable": 1,
+                    "type": 2.5,
+                    "suffix": "x",
+                    "mouse": "$PeakTimeMultiplierMouse",
+                    "vars": [{ "form": "Goo1", "auxVar": "*OblLock_INI", "key": 9, "configINI": "Difficulty:fPeakTimeMul", "default": 0.75 }],
+                    "scale": { "valueDecimal": 2, "valueIncrement": 0.01, "valueMin": 0.5, "valueMax": 2, "suffix": "x" }
+                },
+                "12": {
+                    "title": "$BreakLockChance",
+                    "enable": 1,
+                    "type": 2,
+                    "mouse": "$BreakLockChanceMouse",
+                    "suffix": "%",
+                    "vars": [{ "form": "Goo1", "auxVar": "*OblLock_INI", "key": 3, "configINI": "Difficulty:iBreakLockChance", "default": 50 }],
+                    "scale": { "valueDecimal": 0, "valueIncrement": 1, "valueMin": 0, "valueMax": 100, "suffix": "%" }
+                }
+            }
+        }
+    }
+}

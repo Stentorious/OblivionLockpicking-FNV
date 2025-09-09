@@ -68,7 +68,7 @@ begin Function {iKeyID}
 			PlaySound UILockpickingForceFail 1
 
 			; Break lock
-			if eval Rand 0 1 < (Goo1.AuxVarGetFlt "*OblLock_INI" 3)
+			if eval GetRandomInRange 0 100 < (Goo1.AuxVarGetFlt "*OblLock_INI" 3)
 				SetLockedOut ((GetLockedOut (rLock = GetMenuTargetRef 1014)) + 1) rLock
 				MessageExAlt 3 "#5|%z" (GetStringSetting "sLockBroken")
 				Call (CompileScript "OblivionLockpicking\CloseLockPickMenu.gek")

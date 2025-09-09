@@ -6,8 +6,13 @@ ref rLock
 
 begin Function {iMenuID}
 
+	; Random chance
+	if eval Goo1.AuxVarGetFlt "*OblLock_INI" 10 < 100 && GetUIFloatAlt "LockPickMenu\_OblivionLockpickingChance" == -1
+		SetUIFloatAlt "LockPickMenu\_OblivionLockpickingChance" (eval GetRandomInRange 0 100 >= (Goo1.AuxVarGetFlt "*OblLock_INI" 10))
+	endif
+
 	; Show vanilla menu
-	if eval (GetType (rLock = GetMenuTargetRef 1014) == 28 && Goo1.AuxVarGetFlt "*OblLock_INI" 0 == 0) || (GetType rLock == 27 && Goo1.AuxVarGetFlt "*OblLock_INI" 1 == 0)
+	if eval (GetType (rLock = GetMenuTargetRef 1014) == 28 && Goo1.AuxVarGetFlt "*OblLock_INI" 0 == 0) || (GetType rLock == 27 && Goo1.AuxVarGetFlt "*OblLock_INI" 1 == 0) || GetUIFloatAlt "LockPickMenu\_OblivionLockpickingChance" == 1
 		SetNumericGameSetting "fLockSkillBase" (Goo1.AuxVarGetFlt "*GS_fLockSkillBase")
 		return
 	endif
